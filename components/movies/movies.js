@@ -21,7 +21,7 @@ export default function Movies({ search, file }){
 
         await fetchMore({
             variables: {
-                page: ++i
+                page: 2
             }
         });
 
