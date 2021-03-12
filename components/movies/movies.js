@@ -1,12 +1,10 @@
 import styles from './movies.module.css';
 import { useQuery } from '@apollo/client';
 import { getMoviesQuery } from '../../lib/queries/queries';
-import { useState } from 'react';
 
+var busy = false;
 
 export default function Movies({ search, file }){
-
-    const [count, setCount] = useState(1);
     
     const {loading, error, data, fetchMore} = useQuery(getMoviesQuery, {
         variables: { search, page: 1 }
@@ -15,18 +13,21 @@ export default function Movies({ search, file }){
     if(loading) return 'Loading...';
     if(error) return 'No results found';
 
-    const limit = data.movies.totalResults / 10;
+    const limit = data.movies.totalResults;
+    const count = data.movies.Search.length;
 
     const loadMore = async () => {
-        if(count >= limit) return;
+        if(count >= limit || busy) return;
 
-        setCount(prevState => prevState + 1);
+        busy = true;
 
         await fetchMore({
             variables: {
-                page: count
+                page: (count / 10) + 1
             }
         }); 
+
+        busy = false;
    }
 
     return (
