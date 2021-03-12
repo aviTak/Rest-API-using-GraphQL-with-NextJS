@@ -25,7 +25,7 @@ export default function Movies({ search, file }){
             }
         });
 
-    }, 6000);
+    }, 5000);
 
     return (
         <>
