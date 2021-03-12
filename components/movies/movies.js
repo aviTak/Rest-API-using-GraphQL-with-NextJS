@@ -12,6 +12,12 @@ export default function Movies({ search, file }){
     if(loading) return 'Loading...';
     if(error) return 'No results found';
 
+    if(typeof window === 'undefined'){
+        console.log('server');
+    } else {
+        console.log('client');
+    }
+
     var i = 1;
 
     var q = setInterval(async () => {
