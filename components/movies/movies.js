@@ -14,8 +14,8 @@ export default function Movies({ search, file }){
     if(loading) return 'Loading...';
     if(error) return 'No results found';
 
-    const limit = (data.movies.Error)? undefined : data.movies.totalResults;
-    const count = (data.movies.Error)? undefined : data.movies.Search.length;
+    const limit = data.movies.totalResults;
+    const count = (data.movies.Search)? data.movies.Search.length : undefined;
 
     const loadMore = async () => {
         if(count >= limit || busy) return;
