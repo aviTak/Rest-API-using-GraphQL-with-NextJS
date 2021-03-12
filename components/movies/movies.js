@@ -17,10 +17,10 @@ export default function Movies({ search, file }){
 
     const limit = data.movies.totalResults / 10;
 
-    const loadMore = () => {
+    const loadMore = async () => {
         if(count >= limit) return;
 
-        setCount(count + 1)
+        setCount(prevState => prevState + 1);
 
         await fetchMore({
             variables: {
