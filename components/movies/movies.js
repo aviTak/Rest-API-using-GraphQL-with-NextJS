@@ -42,7 +42,7 @@ export default function Movies({ search, file }){
                         <br />
                         {data.movies.Search && data.movies.Search.map(movie => (
                             <div key={movie.imdbID}>
-                                <Link href={movie.imdbID}>
+                                <Link href={`/${movie.imdbID}`}>
                                     <a>
                                         {movie.imdbID} 
                                         <br />
