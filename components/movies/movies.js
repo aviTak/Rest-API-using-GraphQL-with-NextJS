@@ -1,9 +1,12 @@
 import styles from './movies.module.css';
 import { useQuery } from '@apollo/client';
 import { getMoviesQuery } from '../../lib/queries/queries';
+import { useState } from 'react';
 
 
 export default function Movies({ search, file }){
+
+    const [count, setCount] = useState(1);
     
     const {loading, error, data, fetchMore} = useQuery(getMoviesQuery, {
         variables: { search, page: 1 }
@@ -12,49 +15,46 @@ export default function Movies({ search, file }){
     if(loading) return 'Loading...';
     if(error) return 'No results found';
 
-    if(typeof window === 'undefined'){
-        console.log('server');
-    } else {
-        console.log('client');
-    }
-/*
-    var i = 1;
+    const limit = data.movies.totalResults / 10;
 
-    var q = setInterval(async () => {
-        
-        if(i === 12)
-            clearInterval(q);
+    const loadMore = () => {
+        if(count >= limit) return;
+
+        setCount(count + 1)
 
         await fetchMore({
             variables: {
-                page: 2
+                page: count
             }
-        });
+        }); 
+   }
 
-    }, 5000);
-*/
     return (
         <>
             { data.movies.Error? 'No results found' :
 
-                <div>
-                    {data.movies.totalResults}
-                    <br />
-                    <br />
-                    {data.movies.Search && data.movies.Search.map(movie => (
-                        <div key={movie.imdbID}>
-                            {movie.imdbID} 
-                            <br />
-                            {movie.Title}
-                            <br />
-                            {movie.Year}
-                            <br />
-                            {movie.Poster}
-                            <br />
-                            <br />
-                        </div>
-                    ))}
-                </div>
+                <>
+                    <div>
+                        {data.movies.totalResults}
+                        <br />
+                        <br />
+                        {data.movies.Search && data.movies.Search.map(movie => (
+                            <div key={movie.imdbID}>
+                                {movie.imdbID} 
+                                <br />
+                                {movie.Title}
+                                <br />
+                                {movie.Year}
+                                <br />
+                                {movie.Poster}
+                                <br />
+                                <br />
+                            </div>
+                        ))}
+                    </div>
+
+                    {(count < limit) && <button onClick={loadMore}>Load More</button>}
+                </>
 
             }
             
