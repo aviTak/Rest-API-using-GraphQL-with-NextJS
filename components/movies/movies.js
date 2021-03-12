@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './movies.module.css';
 import { useQuery } from '@apollo/client';
 import { getMoviesQuery } from '../../lib/queries/queries';
@@ -41,15 +42,19 @@ export default function Movies({ search, file }){
                         <br />
                         {data.movies.Search && data.movies.Search.map(movie => (
                             <div key={movie.imdbID}>
-                                {movie.imdbID} 
-                                <br />
-                                {movie.Title}
-                                <br />
-                                {movie.Year}
-                                <br />
-                                {movie.Poster}
-                                <br />
-                                <br />
+                                <Link href={movie.imdbID}>
+                                    <a>
+                                        {movie.imdbID} 
+                                        <br />
+                                        {movie.Title}
+                                        <br />
+                                        {movie.Year}
+                                        <br />
+                                        {movie.Poster}
+                                        <br />
+                                        <br />
+                                    </a>
+                                </Link>
                             </div>
                         ))}
                     </div>
