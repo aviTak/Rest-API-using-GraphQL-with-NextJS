@@ -1,17 +1,12 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router'; 
 import styles from './movies.module.css';
 import { useQuery } from '@apollo/client';
 import { getMoviesQuery } from '../../lib/queries/queries';
 
 var busy = false;
 
-export default function Movies(){
-
-    const router = useRouter();
+export default function Movies({ search, file }){
     
-    const { search } = router;
-
     const {loading, error, data, fetchMore} = useQuery(getMoviesQuery, {
         variables: { search, page: 1 }
     });
@@ -71,7 +66,8 @@ export default function Movies(){
             
             {
                 console.log(data.movies.Search.length) }
-             
+             {   console.log(file)
+            }
         </>
     );
 };
