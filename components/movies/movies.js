@@ -17,7 +17,7 @@ export default function Movies({ search, file }){
     } else {
         console.log('client');
     }
-
+/*
     var i = 1;
 
     var q = setInterval(async () => {
@@ -32,7 +32,7 @@ export default function Movies({ search, file }){
         });
 
     }, 5000);
-
+*/
     return (
         <>
             { data.movies.Error? 'No results found' :
