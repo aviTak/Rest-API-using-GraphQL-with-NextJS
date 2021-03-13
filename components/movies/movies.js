@@ -65,7 +65,7 @@ export default function Movies({ search, file }){
             }
             
             {
-                console.log(data.movies.Search.length) }
+                console.log(data.movies.Search? data.movies.Search.length : 'No results found') }
              {   console.log(file)
             }
         </>
