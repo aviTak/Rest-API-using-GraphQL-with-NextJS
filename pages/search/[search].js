@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Movies from '../../components/movies/movies';
 import { initializeApollo } from '../../lib/apollo';
 import { getMoviesQuery } from '../../lib/queries/queries';
-/*
+
 export const getServerSideProps = async (context) => {
   const search = context.params.search;
 
@@ -26,7 +26,7 @@ export const getServerSideProps = async (context) => {
       },
   };
 };
-*/
+
 export default function Search({ search, file }) {
   return (
     <Movies search={search} file={file} />

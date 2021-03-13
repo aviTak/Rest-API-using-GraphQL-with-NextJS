@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styles from './movies.module.css';
 import { useQuery } from '@apollo/client';
 import { getMoviesQuery } from '../../lib/queries/queries';
@@ -8,13 +7,8 @@ var busy = false;
 
 export default function Movies({ search, file }){
     
-    const router = useRouter();
-    const value = router.query.search;
-
-    console.log("Value", value);
-
     const {loading, error, data, fetchMore} = useQuery(getMoviesQuery, {
-        variables: { search: value, page: 1 }
+        variables: { search, page: 1 }
     });
     
     if(loading) return 'Loading...';
