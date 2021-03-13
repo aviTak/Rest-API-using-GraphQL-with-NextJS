@@ -14,7 +14,7 @@ export default function Movies({ search, file }){
     console.log("Value", value);
 
     const {loading, error, data, fetchMore} = useQuery(getMoviesQuery, {
-        variables: { search, page: 1 }
+        variables: { search: value, page: 1 }
     });
     
     if(loading) return 'Loading...';
