@@ -29,6 +29,8 @@ export const getServerSideProps = async (context) => {
 
 export default function Search({ search, file }) {
   return (
-    <Movies search={search} file={file} />
+    <>
+      <Movies search={search} file={file} />
+    </>
   );
 };

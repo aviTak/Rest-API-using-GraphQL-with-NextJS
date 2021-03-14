@@ -29,6 +29,8 @@ export const getServerSideProps = async (context) => {
 
 export default function Movie({ id }) {
   return (
-    <SingleMovie id={id} />
+    <>
+      <SingleMovie id={id} />
+    </>
   );
 };
